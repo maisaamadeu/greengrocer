@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/models/item_model.dart';
+import 'package:greengrocer/src/shared/widgets/quantity_button_widget.dart';
 
 class QuantityWidget extends StatefulWidget {
-  QuantityWidget({super.key, required this.item});
+  QuantityWidget({super.key, required this.item, required this.onPress});
 
   final ItemModel item;
+  final Function(bool) onPress;
 
   @override
   State<QuantityWidget> createState() => _QuantityWidgetState();
 }
 
 class _QuantityWidgetState extends State<QuantityWidget> {
-  int quantity = 1;
+  int quantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +38,14 @@ class _QuantityWidgetState extends State<QuantityWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            borderRadius: BorderRadius.circular(245),
-            onTap: () {
-              if (quantity > 0) {
+          QuantityButtonWidget(
+              icon: Icons.remove_rounded,
+              color: Colors.grey,
+              onTap: () {
                 setState(() {
                   quantity--;
                 });
-              }
-            },
-            child: Container(
-              height: 25,
-              width: 25,
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.remove_rounded,
-                color: Colors.white,
-                size: 16,
-              ),
-            ),
-          ),
+              }),
           Text(
             '$quantity ${unit[0].toUpperCase()}${unit.replaceAll(unit[0], '')}',
             style: const TextStyle(
@@ -66,26 +53,14 @@ class _QuantityWidgetState extends State<QuantityWidget> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          InkWell(
-            borderRadius: BorderRadius.circular(245),
+          QuantityButtonWidget(
+            icon: Icons.add_rounded,
+            color: Colors.green,
             onTap: () {
               setState(() {
                 quantity++;
               });
             },
-            child: Container(
-              height: 25,
-              width: 25,
-              decoration: const BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.add_rounded,
-                color: Colors.white,
-                size: 16,
-              ),
-            ),
           ),
         ],
       ),

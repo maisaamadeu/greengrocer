@@ -4,14 +4,14 @@ import 'package:greengrocer/src/shared/theme/app_colors.dart';
 import 'package:greengrocer/src/shared/widgets/category_tile_widget.dart';
 import 'package:greengrocer/src/shared/widgets/item_tile_widget.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeTab> createState() => _HomeTabState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeTabState extends State<HomeTab> {
   String selectedCategory = 'Tudo';
 
   @override
