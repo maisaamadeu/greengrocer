@@ -14,7 +14,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  int quantity = 0;
+  int cartItemQuantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +66,13 @@ class _ProductScreenState extends State<ProductScreen> {
                               ),
                             ),
                             QuantityWidget(
+                              isRemovable: false,
                               item: widget.item,
-                              onPress: (bool add) {
-                                add ? quantity++ : quantity--;
+                              value: cartItemQuantity,
+                              result: (quantity) {
+                                setState(() {
+                                  cartItemQuantity = quantity;
+                                });
                               },
                             ),
                           ],

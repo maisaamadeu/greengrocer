@@ -1,3 +1,4 @@
+import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/models/item_model.dart';
 
 class AppData {
@@ -93,4 +94,13 @@ class AppData {
     'Temperos',
     'Diversos',
   ];
+
+  List<CartItemModel> getCartItems() => [
+        CartItemModel(item: apple, quantity: 2),
+        CartItemModel(item: grape, quantity: 4),
+        CartItemModel(item: guava, quantity: 8),
+        CartItemModel(item: kiwi, quantity: 16),
+        CartItemModel(item: mango, quantity: 32),
+        CartItemModel(item: papaya, quantity: 64),
+      ];
 }
