@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/screens/home/home_tab.dart';
+import 'package:greengrocer/src/screens/profile/profile_tab.dart';
 import 'package:greengrocer/src/shared/cart/cart_tab.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -25,9 +26,7 @@ class _BaseScreenState extends State<BaseScreen> {
           Container(
             color: Colors.blue,
           ),
-          Container(
-            color: Colors.purple,
-          )
+          ProfileTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

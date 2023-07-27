@@ -11,7 +11,11 @@ class CustomTextFieldWidget extends StatefulWidget {
       this.autoCorrect = false,
       this.formatter,
       this.maxLength = 999,
-      this.keyboardType = TextInputType.text});
+      this.keyboardType = TextInputType.text,
+      this.isReadOnly = false,
+      this.hasErrorController = false,
+      this.errorMessage = '',
+      this.hasError = false});
 
   final String label;
   final IconData icon;
@@ -22,6 +26,10 @@ class CustomTextFieldWidget extends StatefulWidget {
   final dynamic formatter;
   final int maxLength;
   final TextInputType keyboardType;
+  final bool isReadOnly;
+  final bool hasErrorController;
+  final bool hasError;
+  final String errorMessage;
 
   @override
   State<CustomTextFieldWidget> createState() => _CustomTextFieldWidgetState();
@@ -41,11 +49,17 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
+        readOnly: widget.isReadOnly,
         keyboardType: widget.keyboardType,
         controller: widget.controller,
         obscureText: isObscure,
         autocorrect: widget.autoCorrect,
         decoration: InputDecoration(
+          errorText: widget.hasErrorController
+              ? widget.hasError
+                  ? widget.errorMessage
+                  : null
+              : null,
           counterText: '',
           hintText: widget.hintText,
           label: Text(widget.label),
