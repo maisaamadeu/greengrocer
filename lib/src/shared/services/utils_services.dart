@@ -5,4 +5,9 @@ class UtilsServices {
     NumberFormat numberFormat = NumberFormat.simpleCurrency(locale: 'pt_br');
     return numberFormat.format(price);
   }
+
+  String formatDateTime(DateTime dateTime) {
+    String dateFormat = DateFormat('dd/MM/yyyy - HH:mm').format(dateTime);
+    return dateFormat;
+  }
 }
