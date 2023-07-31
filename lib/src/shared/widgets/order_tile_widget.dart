@@ -3,6 +3,7 @@ import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/models/order_model.dart';
 import 'package:greengrocer/src/shared/services/utils_services.dart';
 import 'package:greengrocer/src/shared/widgets/order_status_widget.dart';
+import 'package:greengrocer/src/shared/widgets/payment_dialog_widget.dart';
 
 class OrderTileWidget extends StatelessWidget {
   const OrderTileWidget({super.key, required this.order});
@@ -86,12 +87,12 @@ class OrderTileWidget extends StatelessWidget {
             //TOTAL
             Text.rich(
               TextSpan(
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                 ),
                 children: [
                   const TextSpan(
-                    text: 'Total',
+                    text: 'Total ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -120,7 +121,12 @@ class OrderTileWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => PaymentDialogWidget(order: order),
+                  );
+                },
                 icon: Image.asset(
                   'assets/images/app_images/pix.png',
                   height: 18,

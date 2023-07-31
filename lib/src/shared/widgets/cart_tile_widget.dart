@@ -9,10 +9,12 @@ class CartTileWidget extends StatefulWidget {
     super.key,
     required this.cartItem,
     required this.remove,
+    required this.updateState,
   });
 
   final CartItemModel cartItem;
   final Function(CartItemModel) remove;
+  final VoidCallback updateState;
 
   @override
   State<CartTileWidget> createState() => _CartTileWidgetState();
@@ -68,6 +70,8 @@ class _CartTileWidgetState extends State<CartTileWidget> {
                 widget.remove(widget.cartItem);
               }
             });
+
+            widget.updateState();
           },
         ),
       ),

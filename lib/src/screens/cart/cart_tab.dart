@@ -5,6 +5,7 @@ import 'package:greengrocer/src/shared/services/utils_services.dart';
 import 'package:greengrocer/src/shared/theme/app_colors.dart';
 import 'package:greengrocer/src/shared/widgets/cart_tile_widget.dart';
 import 'package:greengrocer/src/shared/widgets/custom_elevated_button_widget.dart';
+import 'package:greengrocer/src/shared/widgets/payment_dialog_widget.dart';
 
 class CartTab extends StatefulWidget {
   CartTab({super.key});
@@ -15,6 +16,14 @@ class CartTab extends StatefulWidget {
 
 class _CartTabState extends State<CartTab> {
   List<CartItemModel> listCartItems = AppData().getCartItems();
+
+  double total = 0;
+
+  @override
+  void initState() {
+    total = cartTotalPrice();
+    super.initState();
+  }
 
   void removeItemFromCart(CartItemModel cartItem) {
     setState(() {
@@ -55,6 +64,11 @@ class _CartTabState extends State<CartTab> {
               itemBuilder: (context, index) => CartTileWidget(
                 cartItem: listCartItems[index],
                 remove: removeItemFromCart,
+                updateState: () {
+                  setState(() {
+                    total = cartTotalPrice();
+                  });
+                },
               ),
             ),
           ),
@@ -90,7 +104,7 @@ class _CartTabState extends State<CartTab> {
                     ),
                   ),
                   Text(
-                    UtilsServices().priceToCurrency(cartTotalPrice()),
+                    UtilsServices().priceToCurrency(total),
                     style: TextStyle(
                       fontSize: 23,
                       color: AppColors.customSwatchColor,
@@ -105,7 +119,16 @@ class _CartTabState extends State<CartTab> {
                     hasIcon: true,
                     onPressed: () async {
                       bool? result = await showOrderConfirmation();
-                      debugPrint(result.toString());
+
+                      if (result ?? false) {
+                        if (context.mounted) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => PaymentDialogWidget(
+                                order: AppData().getOrders()[0]),
+                          );
+                        }
+                      }
                     },
                     iconData: Icons.shopping_cart_checkout_rounded,
                   ),
